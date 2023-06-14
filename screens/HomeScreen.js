@@ -1,4 +1,11 @@
-import { View, Text, SafeAreaView, Image, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -7,6 +14,8 @@ import {
   MagnifyingGlassIcon,
   AdjustmentsVerticalIcon,
 } from 'react-native-heroicons/outline';
+import Categories from '../components/Categories';
+import FeaturedRow from '../components/FeaturedRow';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -44,6 +53,38 @@ const HomeScreen = () => {
         </View>
         <AdjustmentsVerticalIcon color="#00CCBB" />
       </View>
+
+      {/* body */}
+      <ScrollView
+        className="bg-gray-100"
+        contentContainerStyle={{
+          paddingBottom: 100,
+        }}
+      >
+        {/* Categories */}
+        <Categories />
+
+        {/* featured row */}
+        <FeaturedRow
+          title="Featured"
+          description="Paid placement for our partners"
+          id="123"
+        />
+
+          {/* Tasty discount */}
+        <FeaturedRow
+          title="Tasty discount"
+          description="Everyone's been enjoying this discount"
+          id="1234"
+        />
+
+          {/* Offers for you */}
+        <FeaturedRow
+          title="Offers for you!"
+          description="Special offers for you!"
+          id="12345"
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
