@@ -1,8 +1,18 @@
 import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CategoryCard from './CategoryCard';
+import sanityClient, { urlFor } from '../sanity';
 
 const Categories = () => {
+  const [categoriesDetail, setCategoriesDetail] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const posts = await sanityClient.fetch(`*[_type == "category"]`);
+      setCategoriesDetail(posts);
+    }
+    fetchData();
+  }, []);
+
   return (
     <ScrollView
       horizontal
@@ -13,15 +23,15 @@ const Categories = () => {
       }}
     >
       {/* categorycard */}
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
-      <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" />
+      {categoriesDetail.map((item) => (
+        <CategoryCard
+          key={item._id}
+          imgUrl={urlFor(item.image.asset._ref).width(200).url()}
+          title={item.title}
+        />
+      ))}
+
+      {/* <CategoryCard imgUrl="https://links.papareact.com/gn7" title="testing" /> */}
     </ScrollView>
   );
 };
