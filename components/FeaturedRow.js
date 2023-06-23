@@ -6,6 +6,7 @@ import sanityClient, { urlFor } from '../sanity';
 
 const FeaturedRow = ({ id, title, description }) => {
   const [restaurantDetails, setRestaurantDetails] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       //   const posts = await sanityClient.fetch(`*[_type == "featured" && _id=="${id}"]{
@@ -26,7 +27,7 @@ const FeaturedRow = ({ id, title, description }) => {
               ...,
               dishes[]->,
                 type->{
-                namae
+                name
                 }
             },
               }[0]
@@ -37,7 +38,7 @@ const FeaturedRow = ({ id, title, description }) => {
     }
     fetchData();
   }, []);
-  
+
   return (
     <View>
       <View className="mt-4 flex-row justify-between items-center px-4">
@@ -58,7 +59,7 @@ const FeaturedRow = ({ id, title, description }) => {
                 id={item?._id}
                 key={item?._id}
                 imgUrl={item?.image?.asset?._ref}
-                title={item?.title}
+                title={item?.name}
                 rating={item?.rating}
                 genre={item?.type?.name}
                 address={item?.address}

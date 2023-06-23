@@ -17,6 +17,7 @@ const RestaurantCard = ({
   long,
   lat,
 }) => {
+  console.log()
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -34,11 +35,11 @@ const RestaurantCard = ({
           lat,
         })
       }
-      className="bg-white mr-3 shadow"
+      className="bg-white w-64 mr-3 shadow"
     >
       <Image
         source={{ uri: urlFor(imgUrl).url() }}
-        className="h-36 w-64 rounded-sm"
+        className="h-36 w-fit rounded-sm "
       />
       <View className="px-3 pb-4">
         <Text className="font-bold pt-2 text-lg">{title}</Text>
