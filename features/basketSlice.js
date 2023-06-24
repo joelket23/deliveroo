@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
@@ -12,7 +12,17 @@ export const basketSlice = createSlice({
       state.items = [...state.items, action.payload];
     },
     removeFromBasket: (state, action) => {
-      state.value -= 1;
+      const index = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      let newBasket = [...state.items];
+
+      if (index >= 0) {
+        newBasket.splice(index, 1);
+      } else {
+        console.warn('id is not in basket');
+      }
+      state.items = newBasket;
     },
   },
 });
@@ -22,7 +32,15 @@ export const { addToBasket, removeFromBasket } = basketSlice.actions;
 
 export const selectBasketItems = (state) => state.basket.items;
 
-export const selectBasketItemsWithId = (state, id) =>
-  state.basket.items.filter((item) => item.id === id);
+// export const selectBasketItemsWithId = (state, id) =>
+//   state.basket.items.filter((item) => item.id === id);
 
+export const selectBasketItemsWithId = createSelector(
+  selectBasketItems,
+  (_, id) => id,
+  (items, id) => items.filter((item) => item.id === id)
+);
+
+export const selectBasketTotal = (state) =>
+  state.basket.items.reduce((total, item) => total += item.price, 0);
 export default basketSlice.reducer;

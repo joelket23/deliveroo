@@ -13,6 +13,7 @@ import {
   QuestionMarkCircleIcon,
 } from 'react-native-heroicons/outline';
 import DishRow from '../components/DishRow';
+import BasketIcon from '../components/BasketIcon';
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -38,6 +39,8 @@ const RestaurantScreen = () => {
     });
   }, []);
   return (
+    <>
+    <BasketIcon />
     <ScrollView>
       <View className="relative">
         <Image
@@ -77,7 +80,7 @@ const RestaurantScreen = () => {
           <ChevronRightIcon color="#00CCBB" />
         </TouchableOpacity>
       </View>
-      <View>
+      <View className='pb-32'>
         <Text className='px-4 pt-6 mb-6 font-bold text-xl'>Menu</Text>
         {/* DishRows */}
         {dishes.map(item=>(
@@ -92,6 +95,7 @@ const RestaurantScreen = () => {
         ))}
       </View>
     </ScrollView>
+    </>
   );
 };
 
