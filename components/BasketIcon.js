@@ -11,6 +11,8 @@ const BasketIcon = () => {
   const navigation = useNavigation();
   const basketTotal = useSelector(selectBasketTotal);
 
+
+  //with this if we have 0 item in basket that we don't want to disply basket button
   if (items.length === 0) return null;
   return (
     <View className="absolute bottom-10 w-full z-50">
