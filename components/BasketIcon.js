@@ -11,7 +11,7 @@ const BasketIcon = () => {
   const navigation = useNavigation();
   const basketTotal = useSelector(selectBasketTotal);
 
-
+  // console.log("items",items)
   //with this if we have 0 item in basket that we don't want to disply basket button
   if (items.length === 0) return null;
   return (
